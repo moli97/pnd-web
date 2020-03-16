@@ -8,6 +8,9 @@ let req = Axios.create({
 })
 
 const errorHandle = (status) => {
+    if (status === 401) {
+        router.push("/login")
+    }
     if (status === 404) {
         router.push('/404')
     }
