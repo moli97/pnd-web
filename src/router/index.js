@@ -12,7 +12,13 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 let router = new Router({
   routes: [
     {
-      path: '', 
+      path: '/login',
+      component: () => import('@/views/login'),
+      props: true,
+      meta: {title: '登录'}
+    },
+    {
+      path: '',
       redirect: '/folder/0',
       component: () => import('@/views/layout/Layout'),
       children: [
