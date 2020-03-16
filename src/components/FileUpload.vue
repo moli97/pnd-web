@@ -57,6 +57,7 @@ export default {
     return {
       fileMap: {},
       options: {
+        headers: {"accessToken":localStorage.getItem("accessToken")},
         target: resourceUploadUrl(), // 目标上传 URL
         chunkSize: '2048000',   //分块大小
         fileParameterName: 'file', //上传文件时文件的参数名，默认file
