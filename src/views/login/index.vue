@@ -39,8 +39,8 @@
             return {
                 logining: false,
                 ruleForm2: {
-                    username: 'admin',
-                    password: '123456',
+                    username: '',
+                    password: '',
                 },
                 rules2: {
                     username: [{required: true, message: 'please enter your account', trigger: 'blur'}],
