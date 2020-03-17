@@ -30,10 +30,7 @@
                     this.$router.push("/login")
                   }
                 })
-            }).catch(() => {
-                localStorage.setItem("accessToken","");
-                this.$router.push("/login")
-            });
+            }).catch(() => {});
         }
       }
     }
