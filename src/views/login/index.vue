@@ -70,6 +70,11 @@
                     }
                 })
             }
+        },
+        created() {
+            if (localStorage.getItem("accessToken")) {
+                this.$router.push({path: '/'})
+            }
         }
     };
 </script>
