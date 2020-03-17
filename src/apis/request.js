@@ -8,12 +8,6 @@ let req = Axios.create({
 
 const errorHandle = (response) => {
     if (response.status === 401) {
-        // eslint-disable-next-line no-console
-        console.log(response)
-        Message({
-            message: response.data.msg,
-            type: 'error'
-        })
         localStorage.setItem("accessToken","");
         router.push("/login")
     }
