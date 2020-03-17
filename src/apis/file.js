@@ -2,7 +2,7 @@ import request from './request'
 
 /**
  * 根据parentId获取所有的文件
- * @param {Number} parentId 
+ * @param {Number} parentId
  */
 export const getFileList = (parentId) => {
   return request({
@@ -25,11 +25,7 @@ export const getFile = (fileId) => {
  * @param {Number} fileId fileId
  */
 export const downloadFileUrl = (fileId) => {
-  if (process.env.NODE_ENV === 'production') {
-    return window.location.origin + `/v1/file/${fileId}/download`
-  } else {
-    return process.env.VUE_APP_API_URI + `/v1/file/${fileId}/download`
-  }
+  return window.location.origin + `/v1/file/${fileId}/download`
 }
 
 /**

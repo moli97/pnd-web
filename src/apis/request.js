@@ -3,7 +3,6 @@ import {Message} from 'element-ui'
 import router from '@/router'
 
 let req = Axios.create({
-    baseURL: process.env.VUE_APP_API_URI,
     timeout: 15000,
 })
 
@@ -11,6 +10,10 @@ const errorHandle = (response) => {
     if (response.status === 401) {
         // eslint-disable-next-line no-console
         console.log(response)
+        Message({
+            message: response.data.msg,
+            type: 'error'
+        })
         localStorage.setItem("accessToken","");
         router.push("/login")
     }
@@ -24,7 +27,7 @@ req.interceptors.response.use(response => {
 }, error => {
     const {response} = error
     if (response) {
-        errorHandle(response.status)
+        errorHandle(response)
         return Promise.reject(response)
     } else {
         // 处理断网
