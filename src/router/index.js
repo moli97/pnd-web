@@ -10,7 +10,6 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 }
 
 let router = new Router({
-  mode: 'history',
   routes: [
     {
       path: '/login',
