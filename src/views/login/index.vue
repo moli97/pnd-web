@@ -61,7 +61,7 @@
                             this.$router.push({path: '/'});
                         }).catch(() => {
                             this.logining = false;
-                            this.$alert('username or password wrong!', 'info', {
+                            this.$alert('用户名或密码错误', '', {
                                 confirmButtonText: 'ok'
                             })
                         })

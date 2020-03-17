@@ -7,11 +7,14 @@ let req = Axios.create({
     timeout: 15000,
 })
 
-const errorHandle = (status) => {
-    if (status === 401) {
+const errorHandle = (response) => {
+    if (response.status === 401) {
+        // eslint-disable-next-line no-console
+        console.log(response)
+        localStorage.setItem("accessToken","");
         router.push("/login")
     }
-    if (status === 404) {
+    if (response.status === 404) {
         router.push('/404')
     }
 }
