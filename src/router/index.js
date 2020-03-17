@@ -13,6 +13,7 @@ let router = new Router({
   routes: [
     {
       path: '/login',
+      name: 'login',
       component: () => import('@/views/login'),
       props: true,
       meta: {title: '登录'}
@@ -50,7 +51,17 @@ router.beforeEach((to, _, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
-  next()
+  if (localStorage.getItem("accessToken") && to.name == "login"){
+    next({
+      path: ''
+    });
+  }else if (!localStorage.getItem("accessToken") && to.name != "login") {
+    next({
+      name: 'login'
+    })
+  }else {
+    next({})
+  }
 })
 
 export default router
