@@ -86,3 +86,10 @@ export const moveOrCopyFiles = (fileIds, targetIds, type) => {
     }
   })
 }
+
+export const downloadFile = (fileId) => {
+  return request({
+    url: `/v1/file/${fileId}/download`,
+    method: 'get',
+  })
+}
