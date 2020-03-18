@@ -46,11 +46,10 @@
           show-overflow-tooltip
           min-width="33">
           <template slot-scope="scope">
-            <div class="file-icon" :class="getFileType(scope.row.type)"></div>
-            <router-link class="file-name" :to="'/folder/' + scope.row.id" v-if="getFileType(scope.row.type) === 'folder'">{{ scope.row.fileName }}</router-link>
-            <router-link class="file-name" :to="'/media/' + scope.row.id" v-else-if="getFileType(scope.row.type) === 'video' || getFileType(scope.row.type) === 'audio'">{{ scope.row.fileName }}</router-link>
-            <router-link class="file-name" to="" v-else-if="getFileType(scope.row.type) === 'picture'" @click.native="preview(scope.row)">{{ scope.row.fileName }}</router-link>
-            <router-link class="file-name" to="" v-else>{{ scope.row.fileName }}</router-link>
+            <router-link class="file-name" to @click.native="fileHandle(scope.row)">
+              <span class="file-icon" :class="getFileType(scope.row.type)"></span>
+              {{ scope.row.fileName }}
+            </router-link>
           </template>
         </el-table-column>
         <el-table-column
@@ -167,6 +166,21 @@ export default {
         })
       }).catch(() => {});
     },
+    fileHandle (row) {
+      switch (this.getFileType(row.type)) {
+          case 'picture':
+              this.preview(row);
+              break;
+          case 'video':
+          case 'audio':
+              this.$router.push(`/media/${row.id}`);
+              break;
+          case 'folder':
+              this.$router.push(`/folder/${row.id}`);
+              break;
+          default:
+      }
+    },
     renameFile (row) {
       this.$prompt('请输入文件夹名', '提示', {
         confirmButtonText: '确定',
@@ -216,12 +230,10 @@ export default {
         })
       }).catch(() => {});
     },
-    preview (arr) {
-        // eslint-disable-next-line no-console
-        console.log(arr)
+    preview (row) {
       this.imgPreview.show = true;
-      this.imgPreview.url = downloadFileUrl(arr.id);
-      this.imgPreview.title = arr.fileName;
+      this.imgPreview.url = downloadFileUrl(row.id);
+      this.imgPreview.title = row.fileName;
     },
     moveTo (arr) {
       this.folderTreeProps = {
