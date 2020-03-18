@@ -496,4 +496,11 @@ export default {
 .code {
   background-position: -596px -1424px;
 }
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px;
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
 </style>
