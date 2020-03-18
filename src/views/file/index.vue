@@ -89,8 +89,10 @@
       </el-table>
     </div>
     <div>
-      <el-dialog :title="imgPreview.title" :visible.sync="imgPreview.show" width="550">
-        <img :src="imgPreview.url" width="500">
+      <el-dialog :title="filePreview.title" :visible.sync="filePreview.show" width="550">
+        <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="500">
+        <pre v-if="filePreview.type == 'code'">我显示{{filePreview.code}}</pre>
+        <div>{{filePreview.code}}</div>
       </el-dialog>
     </div>
     <FolderTreeDialog v-if="folderTreeVisiable" v-bind="folderTreeProps"
@@ -99,7 +101,7 @@
 </template>
 
 <script>
-import {getFileList, createFile, renameFile, deleteFiles, moveOrCopyFiles, downloadFileUrl} from '@/apis/file'
+import {getFileList, createFile, renameFile, deleteFiles, moveOrCopyFiles, downloadFileUrl,downloadFile} from '@/apis/file'
 import {formatSize, formatDateTime} from '@/utils'
 import FolderTreeDialog from '@/components/FolderTreeDialog'
 
@@ -120,10 +122,12 @@ export default {
       fileList: [],
       navigation: [],
       selection: [],
-      imgPreview:{
+      filePreview:{
         title:'',
         show: false,
-        url:''
+        url:'',
+        type: '',
+        code: '',
       },
       supportedType:['default', 'folder', 'pdf', 'compress_file', "web", 'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code'],
     }
@@ -170,7 +174,7 @@ export default {
     fileHandle (row) {
       switch (this.getFileType(row.type)) {
           case 'picture':
-              this.preview(row);
+              this.imgPreview(row);
               break;
           case 'video':
           case 'audio':
@@ -179,8 +183,31 @@ export default {
           case 'folder':
               this.$router.push(`/folder/${row.id}`);
               break;
+          case 'code':
+          case 'txt':
+              this.codePreview(row);
+              break;
+          case 'web':
+              break;
           default:
       }
+    },
+    commonHandle(row) {
+        this.filePreview.show = true;
+        this.filePreview.type = row.type;
+        this.filePreview.title = row.fileName;
+    },
+    codePreview (row) {
+        this.commonHandle(row);
+        downloadFile(row.id).then(res=>{
+            this.filePreview.code = res;
+        }).catch(()=>{
+            this.filePreview.show = false;
+        })
+     },
+    imgPreview (row) {
+        this.commonHandle(row);
+        this.filePreview.url = downloadFileUrl(row.id);
     },
     renameFile (row) {
       this.$prompt('请输入文件夹名', '提示', {
@@ -230,11 +257,6 @@ export default {
           this.renderFileList()
         })
       }).catch(() => {});
-    },
-    preview (row) {
-      this.imgPreview.show = true;
-      this.imgPreview.url = downloadFileUrl(row.id);
-      this.imgPreview.title = row.fileName;
     },
     moveTo (arr) {
       this.folderTreeProps = {
