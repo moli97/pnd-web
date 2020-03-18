@@ -124,7 +124,8 @@ export default {
         title:'',
         show: false,
         url:''
-      }
+      },
+      supportedType:['default', 'folder', 'pdf', 'compress_file', "web", 'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code'],
     }
   },
   watch: {
@@ -334,9 +335,7 @@ export default {
           }, 2000);
     },
     getFileType (originType){
-      let supportedType = ['default', 'folder', 'pdf', 'compress_file', "web",
-            'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code']
-      if (supportedType.indexOf(originType) !== -1){
+      if (this.supportedType.indexOf(originType) !== -1){
         return originType
       }
       return 'default'
