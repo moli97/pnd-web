@@ -50,6 +50,7 @@
             <router-link class="file-name" :to="'/folder/' + scope.row.id" v-if="getFileType(scope.row.type) === 'folder'">{{ scope.row.fileName }}</router-link>
             <router-link class="file-name" :to="'/media/' + scope.row.id" v-else-if="getFileType(scope.row.type) === 'video' || getFileType(scope.row.type) === 'audio'">{{ scope.row.fileName }}</router-link>
             <router-link class="file-name" to="" v-else>{{ scope.row.fileName }}</router-link>
+            <el-button size="mini" icon="el-icon-search" circle v-if="getFileType(scope.row.type) === 'picture'" @click.native="preview(scope.row)"></el-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -76,6 +77,7 @@
                 <i class="el-icon-more"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
+<!--                <el-dropdown-item v-if="getFileType(scope.row.type) === 'picture'" @click.native="preview(scope.row)">查看</el-dropdown-item>-->
                 <el-dropdown-item @click.native="moveTo([scope.row])">移动到</el-dropdown-item>
                 <el-dropdown-item @click.native="copyTo([scope.row])">复制到</el-dropdown-item>
                 <el-dropdown-item @click.native="renameFile(scope.row)">重命名</el-dropdown-item>
@@ -86,6 +88,11 @@
           </template>
         </el-table-column>
       </el-table>
+    </div>
+    <div>
+      <el-dialog :title="imgPreview.title" :visible.sync="imgPreview.show" width="550">
+        <img :src="imgPreview.url" width="500">
+      </el-dialog>
     </div>
     <FolderTreeDialog v-if="folderTreeVisiable" v-bind="folderTreeProps"
       v-on:return="dealReturn"/>
@@ -113,7 +120,12 @@ export default {
       },
       fileList: [],
       navigation: [],
-      selection: []
+      selection: [],
+      imgPreview:{
+        title:'',
+        show: false,
+        url:''
+      }
     }
   },
   watch: {
@@ -203,6 +215,13 @@ export default {
           this.renderFileList()
         })
       }).catch(() => {});
+    },
+    preview (arr) {
+        // eslint-disable-next-line no-console
+        console.log(arr)
+      this.imgPreview.show = true;
+      this.imgPreview.url = downloadFileUrl(arr.id);
+      this.imgPreview.title = arr.fileName;
     },
     moveTo (arr) {
       this.folderTreeProps = {
