@@ -33,14 +33,14 @@ let router = new Router({
           path: '/system',
           component: () => import('@/views/system'),
           meta: {title: '系统信息'}
-        }
+        },
+        {
+          path: '/video/:fileId',
+          component: () => import('@/views/video'),
+          props: true,
+          meta: {title: '播放视频'}
+        },
       ]
-    },
-    {
-      path: '/video/:fileId',
-      component: () => import('@/views/video'),
-      props: true,
-      meta: {title: '播放视频'}
     },
     {path: '*', component: () => import('@/views/404')}
   ]

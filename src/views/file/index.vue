@@ -48,7 +48,7 @@
           <template slot-scope="scope">
             <div class="file-icon" :class="getFileType(scope.row.type)"></div>
             <router-link class="file-name" :to="'/folder/' + scope.row.id" v-if="getFileType(scope.row.type) === 'folder'">{{ scope.row.fileName }}</router-link>
-            <router-link target="_blank" class="file-name" :to="'/video/' + scope.row.id" v-else-if="getFileType(scope.row.type) === 'video'">{{ scope.row.fileName }}</router-link>
+            <router-link class="file-name" :to="'/video/' + scope.row.id" v-else-if="getFileType(scope.row.type) === 'video'">{{ scope.row.fileName }}</router-link>
             <router-link class="file-name" to="" v-else>{{ scope.row.fileName }}</router-link>
           </template>
         </el-table-column>
@@ -354,7 +354,7 @@ export default {
   }
   .navigation {
     font-size: 14px;
-    font-weight: 450;
+    font-weight: 500;
     margin: 10px 0px;
     .previous-level {
       cursor: pointer;
