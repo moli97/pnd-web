@@ -2,17 +2,17 @@
   <el-container class="app-container">
     <el-main>
       <span class="routerJump" @click="routerJump">返回上一级</span>
-      <div class="video-container">
+      <div class="media-container">
         <div class="header">
-          <div class="video-title">
+          <div class="media-title">
             {{ title }}
           </div>
           <div class="other">
             <el-link type="primary" @click="download">下载</el-link>
           </div>
         </div>
-        <div class="video-content">
-          <div id="video-player"></div>
+        <div class="media-content">
+          <div id="media-player"></div>
         </div>
       </div>
     </el-main>
@@ -34,7 +34,7 @@ export default {
   data (){
     return {
       title: '',
-      videoSrc: downloadFileUrl(this.fileId),
+      mediaSrc: downloadFileUrl(this.fileId),
       dp: null
     }
   },
@@ -42,8 +42,8 @@ export default {
     getFile(this.fileId).then(response => {
       this.title = response.data.fileName
       this.dp = new DPlayer({
-        container: document.getElementById('video-player'),
-        video: {
+        container: document.getElementById('media-player'),
+          video: {
           url: downloadFileUrl(this.fileId)
         }
       })
@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/styles/layout.scss";
-.video-container {
+.media-container {
   width: 980px;
   height: 100%;
   margin: 0 auto;
@@ -78,7 +78,7 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-  .video-content {
+  .media-content {
     width: 980px;
   }
 }

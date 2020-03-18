@@ -35,10 +35,10 @@ let router = new Router({
           meta: {title: '系统信息'}
         },
         {
-          path: '/video/:fileId',
-          component: () => import('@/views/video'),
+          path: '/media/:fileId',
+          component: () => import('@/views/media'),
           props: true,
-          meta: {title: '播放视频'}
+          meta: {title: '播放音视频'}
         },
       ]
     },
