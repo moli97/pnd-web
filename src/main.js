@@ -3,11 +3,14 @@ import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN'
+import VueAppend from 'vue-append'
+import particle from './background'
 
 import router from './router'
 import store from './store'
 
 Vue.use(ElementUI, { locale })
+Vue.use(VueAppend)
 Vue.config.productionTip = false
 
 window.eventBus = new Vue()
@@ -17,3 +20,5 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app')
+
+particle()

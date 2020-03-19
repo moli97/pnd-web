@@ -94,7 +94,7 @@
         <div>
           <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="500">
           <pre v-else-if="filePreview.type == 'code' || filePreview.type == 'txt'">{{filePreview.code}}</pre>
-          <div v-else-if="filePreview.type == 'web'" v-html="filePreview.code"></div>
+          <div v-else-if="filePreview.type == 'web'" v-append="filePreview.code" @appended="appended"></div>
         </div>
       </el-dialog>
     </div>
@@ -143,6 +143,10 @@ export default {
     }
   },
   methods: {
+    appended() {
+        // eslint-disable-next-line no-console
+        console.log('appended!');
+    },
     uploadFileTrigger () {
       window.eventBus.$emit('openUploader')
     },
