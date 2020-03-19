@@ -90,9 +90,12 @@
     </div>
     <div>
       <el-dialog :title="filePreview.title" :visible.sync="filePreview.show" width="550">
-        <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="500">
-        <pre v-if="filePreview.type == 'code'">我显示{{filePreview.code}}</pre>
-        <div>{{filePreview.code}}</div>
+        <el-button v-if="filePreview.rawType == 'web'" @click="webOutputFormat" size="mini" style="position: relative; left: 4px">change</el-button>
+        <div>
+          <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="500">
+          <pre v-else-if="filePreview.type == 'code' || filePreview.type == 'txt'">{{filePreview.code}}</pre>
+          <div v-else-if="filePreview.type == 'web'" v-html="filePreview.code"></div>
+        </div>
       </el-dialog>
     </div>
     <FolderTreeDialog v-if="folderTreeVisiable" v-bind="folderTreeProps"
@@ -128,6 +131,7 @@ export default {
         url:'',
         type: '',
         code: '',
+        rawType: '',
       },
       supportedType:['default', 'folder', 'pdf', 'compress_file', "web", 'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code'],
     }
@@ -188,6 +192,7 @@ export default {
               this.codePreview(row);
               break;
           case 'web':
+              this.codePreview(row);
               break;
           default:
       }
@@ -196,6 +201,7 @@ export default {
         this.filePreview.show = true;
         this.filePreview.type = row.type;
         this.filePreview.title = row.fileName;
+        this.filePreview.rawType = row.type;
     },
     codePreview (row) {
         this.commonHandle(row);
@@ -208,6 +214,20 @@ export default {
     imgPreview (row) {
         this.commonHandle(row);
         this.filePreview.url = downloadFileUrl(row.id);
+    },
+    outputFormat(type) {
+        this.filePreview.type = type;
+    },
+    webOutputFormat() {
+        switch (this.filePreview.type) {
+            case "web":
+                this.outputFormat("code");
+                break;
+            case "code":
+                this.outputFormat("web");
+                break;
+            default:
+        }
     },
     renameFile (row) {
       this.$prompt('请输入文件夹名', '提示', {
