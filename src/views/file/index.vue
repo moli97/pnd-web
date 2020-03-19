@@ -194,6 +194,13 @@ export default {
           case 'web':
               this.codePreview(row);
               break;
+          case 'pdf':
+              // eslint-disable-next-line no-console
+              console.log(`http://view.xdocin.com/xdoc?_xdoc=${downloadFileUrl(row.id)}`)
+              // eslint-disable-next-line no-console
+              console.log(`/pdf/web/viewer.html?file=${downloadFileUrl(row.id)}`)
+              this.pdfPreview(row);
+              break;
           default:
       }
     },
@@ -214,6 +221,13 @@ export default {
     imgPreview (row) {
         this.commonHandle(row);
         this.filePreview.url = downloadFileUrl(row.id);
+    },
+    pdfPreview (row) {
+        let routeUrl = this.$router.resolve({
+            path: "/pdf/web/viewer.html",
+            query: {file:downloadFileUrl(row.id)}
+        });
+        window.open(routeUrl.href, '_blank');
     },
     outputFormat(type) {
         this.filePreview.type = type;
