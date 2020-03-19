@@ -57,7 +57,9 @@ export default {
     return {
       fileMap: {},
       options: {
-        headers: {"accessToken":localStorage.getItem("accessToken")},
+        headers: {
+          accessToken: localStorage.getItem("accessToken")
+        },
         target: resourceUploadUrl(), // 目标上传 URL
         chunkSize: '2048000',   //分块大小
         fileParameterName: 'file', //上传文件时文件的参数名，默认file
@@ -91,7 +93,11 @@ export default {
     }
   },
   methods: {
+    addHeaders () {
+      this.options.headers.accessToken = localStorage.getItem("accessToken");
+    },
     onFileAdded () {
+      this.addHeaders();
       this.fileMap[arguments[0].uniqueIdentifier] = this.$store.state.folderId
       this.panelShow = true;
       this.computeMD5(arguments[0]);
@@ -118,7 +124,7 @@ export default {
       })
     },
     onFileError() {
-
+      this.addHeaders();
     },
     fileListShow() {
       this.collapse = !this.collapse
@@ -133,6 +139,7 @@ export default {
   },
   mounted() {
     window.eventBus.$on('openUploader', query => {
+      this.addHeaders();
       this.params = query || {};
       if (this.$refs.uploadFileBtn) {
           this.$refs.uploadFileBtn.$el.click();
