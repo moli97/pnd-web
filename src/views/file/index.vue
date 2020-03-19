@@ -133,7 +133,7 @@ export default {
         code: '',
         rawType: '',
       },
-      supportedType:['default', 'folder', 'pdf', 'compress_file', "web", 'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code'],
+      supportedType:['default', 'folder', 'pdf', 'compress_file', "web", 'video', 'audio', 'picture', 'doc', 'txt', 'torrent', 'ppt', 'code', 'excel'],
     }
   },
   watch: {
@@ -200,6 +200,9 @@ export default {
               // eslint-disable-next-line no-console
               console.log(`/pdf/web/viewer.html?file=${downloadFileUrl(row.id)}`)
               this.pdfPreview(row);
+              break;
+          case 'doc':
+              alert(downloadFileUrl(row.id))
               break;
           default:
       }
@@ -529,6 +532,9 @@ export default {
 }
 .code {
   background-position: -596px -1424px;
+}
+.excel {
+  background-position: -596px -240px;
 }
 pre {
   outline: 1px solid #ccc;
