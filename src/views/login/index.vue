@@ -67,7 +67,7 @@
 
 <style>
   #poster {
-    background:url("../../assets/nightscape2.jpg") no-repeat;
+    background:url("../../assets/nightscape4.jpg") no-repeat;
     background-position: center;
     height: 100%;
     width: 100%;
