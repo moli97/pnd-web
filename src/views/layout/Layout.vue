@@ -1,10 +1,10 @@
 <template>
   <el-container class="app-container">
     <el-header height="50px">
-      <Header></Header>
+      <Header @change="show = !show"></Header>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="200px" v-show="show">
         <Aside></Aside>
       </el-aside>
       <el-main>
@@ -24,7 +24,12 @@ import Aside from '@/views/layout/Aside'
 
 export default {
   name: 'Layout',
-  components: { Header, Aside }
+  components: { Header, Aside },
+    data() {
+      return{
+          show:true
+      }
+    }
 }
 </script>
 

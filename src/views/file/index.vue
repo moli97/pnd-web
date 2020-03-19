@@ -89,10 +89,10 @@
       </el-table>
     </div>
     <div>
-      <el-dialog :title="filePreview.title" :visible.sync="filePreview.show" width="550">
+      <el-dialog :title="filePreview.title" :visible.sync="filePreview.show" width="100%" style="max-width: 500px;margin: auto;">
         <el-button v-if="filePreview.rawType == 'web'" @click="webOutputFormat" size="mini" style="position: relative; left: 4px">change</el-button>
         <div>
-          <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="500">
+          <img v-if="filePreview.type == 'picture'" :src="filePreview.url" width="100%" style="max-width: 450px">
           <pre v-else-if="filePreview.type == 'code' || filePreview.type == 'txt'">{{filePreview.code}}</pre>
           <div v-else-if="filePreview.type == 'web'" v-append="filePreview.code" @appended="appended"></div>
         </div>

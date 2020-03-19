@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <i v-if="asideVisiable" class="el-icon-s-fold icon"></i>
+    <i v-if="asideVisiable" class="el-icon-s-fold icon" @click="change"></i>
     <router-link to="/"><span class="name">个人网盘</span></router-link>
     <div style="margin-left: auto" @click="logout">
       <el-avatar :size="30" :src="require('@/assets/user.jpeg')"></el-avatar>
@@ -31,7 +31,10 @@
                   }
                 })
             }).catch(() => {});
-        }
+        },
+          change() {
+            this.$emit("change")
+          }
       }
     }
 </script>
