@@ -56,12 +56,13 @@
           prop="size"
           label="大小"
           sortable
+          show-overflow-tooltip
           :formatter="sizeFormatter"
-          min-width="12">
+          min-width="22">
         </el-table-column>
         <el-table-column
           prop="updateTime"
-          label="修改日期"
+          label="日期"
           sortable
           show-overflow-tooltip
           :formatter="dateFormatter"
@@ -411,7 +412,7 @@ export default {
       return size
     },
     dateFormatter(row) {
-      return formatDateTime(row.updateTime)
+      return formatDateTime(row.updateTime,'MM/dd')
     }
   },
   mounted () {
