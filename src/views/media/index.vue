@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="media-content">
-          <div id="media-player"></div>
+          <div id="media-player" class="media-player"></div>
         </div>
       </div>
     </el-main>
@@ -69,7 +69,8 @@ export default {
 <style lang="scss" scoped>
 @import "src/styles/layout.scss";
 .media-container {
-  width: 980px;
+  width: 100%;
+  max-width: 980px;
   height: 100%;
   margin: 0 auto;
   .header {
@@ -79,7 +80,13 @@ export default {
     justify-content: space-between;
   }
   .media-content {
-    width: 980px;
+    width: 100%;
+    max-width: 980px;
+    .media-player {
+      width: 100%;
+      max-width: 980px;
+      height: auto;
+    }
   }
 }
 .routerJump:hover {
