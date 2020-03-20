@@ -36,7 +36,7 @@ let router = new Router({
           meta: {title: '系统信息'}
         },
         {
-          path: '/media/:fileId',
+          path: '/media/:fileId/:type?',
           component: () => import('@/views/media'),
           props: true,
           meta: {title: '播放音视频'}

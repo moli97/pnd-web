@@ -187,7 +187,7 @@ export default {
               break;
           case 'video':
           case 'audio':
-              this.$router.push(`/media/${row.id}`);
+              this.$router.push(`/media/${row.id}/${row.type}`);
               break;
           case 'folder':
               this.$router.push(`/folder/${row.id}`);
