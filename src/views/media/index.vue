@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="media-content">
-          <div id="media-player" class="media-player"></div>
+          <div id="media-player" class="media-player" v-html="internalNode"></div>
         </div>
       </div>
     </el-main>
@@ -29,25 +29,22 @@ export default {
     fileId: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      required: false
     }
   },
   data (){
     return {
       title: '',
       mediaSrc: downloadFileUrl(this.fileId),
-      dp: null
+      dp: null,
+      internalNode:''
     }
   },
   mounted () {
-    getFile(this.fileId).then(response => {
-      this.title = response.data.fileName
-      this.dp = new DPlayer({
-        container: document.getElementById('media-player'),
-          video: {
-          url: downloadFileUrl(this.fileId)
-        }
-      })
-    }).catch(() => {})
+      this.renderMedia(this.type);
   },
   methods: {
     download () {
@@ -55,13 +52,37 @@ export default {
       tag.setAttribute('href', downloadFileUrl(this.fileId))
       tag.click()
     },
+      renderMedia(type) {
+        getFile(this.fileId).then(response => {
+            this.title = response.data.fileName
+            switch (type) {
+                case 'video':
+                    this.internalNode = ''
+                    this.renderVideo();
+                    break;
+                case 'audio':
+                    this.internalNode = `<audio src=${downloadFileUrl(this.fileId)} controls></audio>`
+                    break;
+                default:
+                    break;
+            }
+        }).catch(() => {})
+    },
+    renderVideo() {
+        this.dp = new DPlayer({
+            container: document.getElementById('media-player'),
+            video: {
+                url: downloadFileUrl(this.fileId)
+            }
+        })
+    },
     routerJump() {
         if (window.history.length<=2) {
             this.$router.push({path:'/'})
         }else {
             this.$router.go(-1);
         }
-    }
+    },
   }
 }
 </script>
