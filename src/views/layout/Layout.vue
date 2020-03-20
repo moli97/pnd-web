@@ -21,15 +21,16 @@
 <script>
 import Header from '@/views/layout/Header'
 import Aside from '@/views/layout/Aside'
+import {_isPC} from '@/utils'
 
 export default {
   name: 'Layout',
   components: { Header, Aside },
     data() {
       return{
-          show:true
+          show:_isPC()
       }
-    }
+    },
 }
 </script>
 
