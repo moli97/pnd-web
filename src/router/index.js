@@ -36,6 +36,11 @@ let router = new Router({
           meta: {title: '系统信息'}
         },
         {
+          path: '/admin',
+          component: () => import('@/views/admin'),
+          meta: {title: '系统管理'}
+        },
+        {
           path: '/media/:fileId/:type?',
           component: () => import('@/views/media'),
           props: true,

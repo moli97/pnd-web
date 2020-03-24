@@ -5,8 +5,8 @@ module.exports = {
         port: 9876,
         proxy: {
             '/v1': {
-                target: 'http://pan.imoli.top',  // 请求本地 拦截/rbac代理到后台项目
-                // target: 'http://10.2.201:11111',  // 请求本地 拦截/rbac代理到后台项目
+                //target: 'http://pan.imoli.top',  // 请求本地 拦截/rbac代理到后台项目
+                target: 'http://127.0.0.1:8989',  // 请求本地 拦截/rbac代理到后台项目
 				ws: false
             }
         }

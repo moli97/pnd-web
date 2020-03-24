@@ -8,3 +8,16 @@ export const systemInfo = () => {
     url: `/v1/system`
   })
 }
+
+/** 上传到data 目录下的文件 */
+export const dataUploadUrl = () => {
+  return window.location.origin + '/v1/upload'
+}
+
+export const scriptExec = (data) => {
+  return request({
+    url: '/v1/exec',
+    method: 'post',
+    data: data
+  })
+}

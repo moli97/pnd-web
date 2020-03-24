@@ -5,8 +5,12 @@
       <span slot="title">全部文件</span>
     </el-menu-item>
     <el-menu-item index="2" @click="linkTo('/system')">
-      <i class="el-icon-setting"></i>
+      <i class="el-icon-info"></i>
       <span slot="title">系统信息</span>
+    </el-menu-item>
+    <el-menu-item index="3" @click="linkTo('/admin')">
+      <i class="el-icon-setting"></i>
+      <span slot="title">系统管理</span>
     </el-menu-item>
   </el-menu>
 </template>
