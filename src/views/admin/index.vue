@@ -1,20 +1,21 @@
 <template>
-  <el-main>
+  <el-main style="margin: auto">
     <el-row :gutter="20">
       <upload></upload>
     </el-row>
     <el-row :gutter="20">
-      <exec></exec>
+      <config></config>
     </el-row>
   </el-main>
 </template>
 
 <script>
     import Upload from "./upload";
-    import Exec from "./exec";
+    import Config from "./config";
+
     export default {
         name: "dataAdmin",
-        components: {Exec, Upload}
+        components: {Config, Upload}
     }
 </script>
 

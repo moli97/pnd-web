@@ -14,6 +14,13 @@ export const dataUploadUrl = () => {
   return window.location.origin + '/v1/upload'
 }
 
+export const configs = () => {
+  return request({
+    url: '/v1/configs',
+    method: 'post',
+  })
+}
+
 export const scriptExec = (data) => {
   return request({
     url: '/v1/exec',

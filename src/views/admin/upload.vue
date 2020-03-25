@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 500px">
+  <div style="max-width: 500px;margin: auto">
     <el-upload
             class="upload-demo"
             ref="upload"
@@ -10,12 +10,11 @@
             :file-list="fileList"
             :auto-upload="false"
             multiple
-            drag
-            style="width: 100%">
+            drag>
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
     </el-upload>
-    <el-button style="margin-left: 10px; width: 100%" size="small" type="success" @click="submitUpload">上传</el-button>
+    <el-button style="margin-left: 10px; width: 100%;max-width: 340px" size="small" type="success" @click="submitUpload">上传</el-button>
   </div>
 </template>
 
