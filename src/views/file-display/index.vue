@@ -28,10 +28,6 @@
             },
             getFileList(path) {
                 this.requestPath = path;
-                let res = {"msg":"success","data":[{"name":"images","path":"images","url":"https://data.imoli.top/images","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"js","path":"js","url":"https://data.imoli.top/js","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"music","path":"music","url":"https://data.imoli.top/music","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"ngrok","path":"ngrok","url":"https://data.imoli.top/ngrok","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"upload","path":"upload","url":"https://data.imoli.top/upload","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"video","path":"video","url":"https://data.imoli.top/video","fileType":"DEFAULT","displayType":"DIRECTORY"},{"name":"favicon.ico","path":"favicon.ico","url":"https://data.imoli.top/favicon.ico","fileType":"PICTURE","displayType":"FILE"}],"extra":[]}
-                if (res.msg == "success") {
-                    this.fileList = res.data;
-                }
                 displayFile({"path": this.requestPath}).then(res => {
                     if (res.msg == "success") {
                         this.fileList = res.data;
