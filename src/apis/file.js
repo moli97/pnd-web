@@ -93,3 +93,12 @@ export const downloadFile = (fileId) => {
     method: 'get',
   })
 }
+
+export const displayFile = (params) => {
+  return request({
+    url: `/v1/fileDisplay`,
+    method: 'get',
+    params: params
+  })
+}
+

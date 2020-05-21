@@ -12,6 +12,10 @@
       <i class="el-icon-setting"></i>
       <span slot="title">系统管理</span>
     </el-menu-item>
+    <el-menu-item index="4" @click="linkTo('/display')">
+      <i class="el-icon-setting"></i>
+      <span slot="title">文件显示</span>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -27,6 +31,12 @@ export default {
       }, {
         name: 'system',
         index: '2',
+      },{
+          name: 'admin',
+          index: '3',
+      },{
+          name: 'display',
+          index: '4',
       }]
     }
   },
